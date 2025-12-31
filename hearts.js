@@ -18,12 +18,7 @@ function createHeart() {
 
 setInterval(createHeart, 500);
 
-function showMsg() {
-    const msg = document.getElementById("message");
-    msg.style.display = "inline-block";
 
-    createHeartBurst();
-}
 function createHeartBurst() {
     const container = document.querySelector('.burst-hearts');
     const button = document.querySelector('.btn-3d');
@@ -69,13 +64,15 @@ function showMsg() {
     msg.style.display = "inline-block";
 
     const music = document.getElementById("bgMusic");
-    if (music.paused) {
-        music.volume = 0.4; // soft sound
+    if (music && music.paused) {
+        music.volume = 0.4;
         music.play();
     }
 
-    createHeartBurst(); // if you already have hearts
+    createHeartBurst();
 }
+
+
 
 
 
