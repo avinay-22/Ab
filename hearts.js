@@ -64,6 +64,19 @@ function showMsg() {
     createHeartBurst();
 }
 
+function showMsg() {
+    const msg = document.getElementById("message");
+    msg.style.display = "inline-block";
+
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.volume = 0.4; // soft sound
+        music.play();
+    }
+
+    createHeartBurst(); // if you already have hearts
+}
+
 
 
 
