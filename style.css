@@ -1,245 +1,120 @@
-.Body{text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;}
-.heading {
-    text-align: center;color: #d6336c;font-size: 42px;font-style: italic;
-   animation: floatUpDown 2s ease-in-out infinite;
-}
-
-
-@keyframes floatUpDown {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-.para{ font-size: 24px;text-align: center;color: #f542bc;}
-
-.p {
-    color: #c2255c;   /* darker pink for contrast */
-    line-height: 1.6;
-}
-
-
-.p1{color: #e64980;}
-
-.hearts span {
-  position: fixed;
-  bottom: -40px;
-  font-size: 30px;
-  animation: floatHeart 6s linear infinite;
-  opacity: 0.7;
-}
-
-@keyframes floatHeart {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-110vh);
-  }
-}
-
-/* positions */
-.hearts span:nth-child(1) { left: 20%; animation-duration: 5s; }
-.hearts span:nth-child(2) { left: 50%; animation-duration: 7s; }
-.hearts span:nth-child(3) { left: 80%; animation-duration: 6s; }
-
 body {
     margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(
-        135deg,
-        #ffe6eb,   /* light blush pink */
-        #ffc1cc    /* soft rose pink */
-    );
-    font-family: 'Poppins', sans-serif; /* optional but nice */
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
-/* 3D button */
-.btn-3d {
-    background: linear-gradient(
-        135deg,
-        #ff5c8a,
-        #ff85a1
-    );
+/* Birthday text */
+.title {
+    position: relative;
+    z-index: 10;
+    margin-top: 120px;
+    font-size: 60px;
     color: white;
-    border: none;
-    padding: 14px 32px;
-    font-size: 16px;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(255, 92, 138, 0.4);
-    transition: all 0.3s ease;
+    text-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
-.btn-3d:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 25px rgba(255, 92, 138, 0.6);
+/* Background container */
+#falling-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
-
-.btn-3d:active {
-  box-shadow: 0 4px #c94f8a;
-  transform: translateY(4px);
-  padding: 14px 28px;
-  min-width: 180px;
-
+/* Each photo */
+.falling-photo {
+    position: absolute;
+    top: -150px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    animation-name: fall;
+    animation-timing-function: linear;
 }
 
-/* Message hidden initially */
-#message {
-  margin-top: 20px;
-  font-size: 24px;
-  color: #fff;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.5s ease;
-}
-
-/* Pop-up animation */
-#message.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-#confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.confetti {
-  position: absolute;
-  font-size: 20px;
-  animation: fall 3s linear forwards;
-}
-
+/* Falling animation */
 @keyframes fall {
-  from {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-#message {
-  color: #ff1493 !important;
-  font-size: 32px !important;
-}
-#message {
-  font-size: clamp(20px, 5vw, 32px);
-}
-.btn-3d {
-  font-size: clamp(16px, 4vw, 20px);
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
 }
 
-.hearts {
+/* 2nd code*/
+.popup {
     position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff0f5;
+    padding: 30px 40px;
+    border: 2px solid #ff66aa;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 1000;
+    display: none; /* hidden by default */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.heart {
-    position: absolute;
-    font-size: 18px;
-    color: #ff5c8a;
-    animation: floatUp 6s linear forwards;
-    text-shadow: 0 0 8px rgba(255, 92, 138, 0.8);
-    opacity: 0.9;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-10vh) scale(1.4);
-        opacity: 0;
-    }
-}
-
-#message {
-    display: none;              /* hidden by default */
-    margin-top: 25px;
-    font-size: 22px;
-    color: #d6336c;
-    background: rgba(255, 255, 255, 0.65);
-    padding: 18px 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(214, 51, 108, 0.35);
-    animation: popUp 0.6s ease forwards;
-}
-
-/* Pop animation */
-@keyframes popUp {
-    0% {
-        transform: scale(0.6);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.burst-hearts {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 5;
-}
-
-.burst-heart {
-    position: absolute;
+.popup p {
     font-size: 20px;
-    animation: burst 1.2s ease-out forwards;
-    text-shadow: 0 0 8px rgba(255, 92, 138, 0.9);
-}
-.sparkle {
-    position: absolute;
-    font-size: 14px;
-    animation: sparkleBurst 1s ease-out forwards;
-    color: #ffd43b;
-    text-shadow: 0 0 6px rgba(255, 212, 59, 0.9);
+    margin-bottom: 20px;
+    color: #ff3399;
 }
 
-@keyframes sparkleBurst {
-    0% {
-        transform: scale(0.2);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--x), var(--y)) scale(1.2);
-        opacity: 0;
-    }
+.popup button {
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff6699;
+    color: white;
+} 
+
+#birthdayBtn:hover {
+    background-color: #ff3366; /* changes on hover */
+    color: white;
 }
 
-@keyframes burst {
-    0% {
-        transform: scale(0.3);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--x), var(--y)) scale(1.6);
-        opacity: 0;
-    }
+#birthdayBtn {
+    padding: 10px 20px;       /* size of the button */
+    font-size: 18px;          /* text size */
+    cursor: pointer;          /* cursor on hover */
+    border: none;             /* remove border */
+    border-radius: 5px;       /* rounded corners */
+    background-color: #ff6699; /* change this to your desired color */
+    color: white;             /* text color */
+}
+#birthdayBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff66cc, #ffcc33, #66ffcc, #ff6699);
+    background-size: 400% 400%;
+    color: white;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Animate gradient */
+#birthdayBtn:hover {
+    background-position: 100% 0;
+    transform: scale(1.1);
+}
+#ageCountdown {
+    margin: 15px 0;
+    font-size: 18px;
+    color: #ff3399;
+    font-weight: bold;
+}
+.para {
+  
+  font-style: initial;
 }
