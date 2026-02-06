@@ -1,78 +1,105 @@
-const heartsContainer = document.querySelector('.hearts');
+const container = document.getElementById("falling-container");
 
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '💖';
+// correct photo names
+const photos = [
+    "./photos/pic1.jpg",
+    "./photos/pic2.jpg",
+    "./photos/pic3.jpg",
+    "./photos/pic4.jpg",
+    "./photos/pic5.jpg",
+    "./photos/pic6.jpg",
+    "./photos/pic7.jpg",
+    "./photos/pic8.jpg"
+];
 
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (4 + Math.random() * 3) + 's';
-    heart.style.fontSize = (14 + Math.random() * 20) + 'px';
 
-    heartsContainer.appendChild(heart);
+function createPhoto() {
 
+    const img = document.createElement("img");
+
+    // pick random photo
+    img.src = photos[Math.floor(Math.random() * photos.length)];
+    img.className = "falling-photo";
+
+    // random horizontal position
+    img.style.left = Math.random() * 100 + "vw";
+
+    // random size
+    const size = Math.random() * 80 + 60;
+    img.style.width = size + "px";
+
+    // random starting rotation
+    img.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    // random falling speed
+    const duration = Math.random() * 5 + 6;
+    img.style.animationDuration = duration + "s";
+
+    container.appendChild(img);
+
+    // remove after fall
     setTimeout(() => {
-        heart.remove();
-    }, 7000);
+        img.remove();
+    }, duration * 1000);
 }
 
-setInterval(createHeart, 500);
+// continuously create photos
+setInterval(createPhoto, 700);
 
+// second code //
+const birthdayBtn = document.getElementById('birthdayBtn');
+const popup = document.getElementById('birthdayPopup');
+const closeBtn = document.getElementById('closePopup');
 
-function createHeartBurst() {
-    const container = document.querySelector('.burst-hearts');
-    const button = document.querySelector('.btn-3d');
-    const rect = button.getBoundingClientRect();
+// Show popup when button is clicked
+birthdayBtn.addEventListener('click', function() {
+    popup.style.display = 'block';
+});
 
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+// Hide popup when Close button is clicked
+closeBtn.addEventListener('click', function() {
+    popup.style.display = 'none';
+});
 
-    for (let i = 0; i < 16; i++) {
+// Adding Timer //
+document.addEventListener("DOMContentLoaded", function() {
+    // Birthday date
+    const birthDate = new Date("2009-02-24T00:00:00");
 
-        // 💖 HEART
-        const heart = document.createElement('div');
-        heart.className = 'burst-heart';
-        heart.innerHTML = '💖';
+    // Function to calculate age
+    function updateAgeCountdown() {
+        const now = new Date();
+        let diff = now - birthDate; // difference in milliseconds
 
-        // ✨ SPARKLE
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.innerHTML = '✨';
+        const seconds = Math.floor(diff / 1000) % 60;
+        const minutes = Math.floor(diff / (1000 * 60)) % 60;
+        const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = 70 + Math.random() * 60;
-
-        [heart, sparkle].forEach(el => {
-            el.style.left = centerX + 'px';
-            el.style.top = centerY + 'px';
-            el.style.setProperty('--x', Math.cos(angle) * distance + 'px');
-            el.style.setProperty('--y', Math.sin(angle) * distance + 'px');
-            container.appendChild(el);
-
-            setTimeout(() => el.remove(), 1200);
-        });
-    }
-}
-
-
-function showMsg() {
-    const msg = document.getElementById("message");
-    msg.style.display = "inline-block";
-
-    const music = document.getElementById("bgMusic");
-    if (music) {
-        music.volume = 0.4;
-        music.play().catch(err => {
-            console.log("Audio error:", err);
-        });
+        const countdownDiv = document.getElementById("ageCountdown");
+        if (countdownDiv) { // check if element exists
+            countdownDiv.innerHTML = `Age: ${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        }
     }
 
-    createHeartBurst();
-}
+    // Start countdown immediately and update every second
+    updateAgeCountdown();
+    setInterval(updateAgeCountdown, 1000);
 
+    // Popup show/hide
+    const birthdayBtn = document.getElementById('birthdayBtn');
+    const popup = document.getElementById('birthdayPopup');
+    const closeBtn = document.getElementById('closePopup');
 
+    birthdayBtn.addEventListener('click', function() {
+        popup.style.display = 'block';
+    });
 
-
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+});
 
 
 
